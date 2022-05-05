@@ -1,0 +1,32 @@
+// Style Portfolios
+
+
+#caption {
+    position: relative;
+}
+#caption figure.imgport img{
+    border-radius: 9px;
+}
+#caption .text {
+      position: absolute;   
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      opacity: 0;
+      transition: all 0.8s ease;      
+  }
+#caption .text h4, .fa-eye {    
+      margin: 0;    
+      color: white;
+  }
+#caption:hover .text {
+    opacity: 1;
+    
+}
+#caption:hover img {
+    -webkit-filter: sepia(90%);
+}
+.btnr{
+    border-radius: 50px;
+}
