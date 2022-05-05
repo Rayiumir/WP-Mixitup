@@ -15,3 +15,5 @@ function RaymondTomcat_scripts()
     wp_enqueue_script('mixitup_min_js',RaymondTomcat_URL . '/js/mixitup.min.js',array(),true);
 }
 add_action('wp_enqueue_scripts','RaymondTomcat_scripts');
+
+require_once('post_type.php');
