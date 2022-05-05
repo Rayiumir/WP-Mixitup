@@ -1,2 +1,2 @@
 # WP-Mixitup-Portfolio
-Create a portfolio or gallery using the mixitupJS library in WordPress
+Create a portfolio or gallery using the mixitupJS library At WordPress
