@@ -10,7 +10,7 @@ function portfolios() {
             ),
             'public' => true,
             'rewrite' => array( 'slug' => 'portfolios' ),
-            'menu_icon' => 'dashicons-slides',
+            'menu_icon' => 'dashicons-images-alt',
             'supports' => array('title', 'thumbnail', 'editor'),
             'taxonomies' => array('category'),
         )
