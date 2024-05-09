@@ -14,37 +14,39 @@
     
     <section class="portfolio mt-4 mb-4">
         <div class="text-center">
+            <button type="button" class="btn btn-danger btnr" data-filter=".all">all</button>
             <?php
-            $all_categories = get_categories(array(
-                'hide_empty' => true
-            ));
+                $terms = get_terms([
+                    'taxonomy' => 'CategoryPortfolio'
+                ]);
+
+                foreach($terms as $row){
             ?>
-            <?php foreach($all_categories as $category): ?>
-                <button type="button" class="btn btn-danger btnr" data-filter=".<?php echo $category->slug; ?>"><?php echo $category->name; ?></button>
-            <?php endforeach; ?>
+            <button type="button" class="btn btn-danger btnr" data-filter=".<?php echo $row->slug; ?>"><?php echo $row->name; ?></button>
+            <?php } ?>
         </div>
     
         <div class="filter">
             <div class="row mt-4">
                 <?php
-                    $args = array(
-                        'post_type' => array('portfolios'),
+                    $portfolio = new WP_Query(
+                        array(
+                            'post_type' => 'portfolio',
+                            'posts_per_page' => 12
+                        )
                     );
-    
-                    $query = new WP_Query($args);
-    
-                    if ($query->have_posts()){
-                        while ($query->have_posts()){
-                            $query->the_post();
-                            $categories = get_the_category();
-                            $slugs = wp_list_pluck($categories, 'slug');
-                            $class_names = join(' ', $slugs);
+
+                    if($portfolio->have_posts()){
+                        while($portfolio->have_posts()){
+                            $portfolio->the_post();
+                            $terms = get_the_terms(get_the_ID(), 'CategoryPortfolio');
+                            $terms = join(', ', wp_list_pluck($terms, 'slug'));
                 ?>
-                <div class="col-6 col-md-3 mb-3 mix<?php if ($class_names) { echo ' ' . $class_names;} ?>" id="caption">
-                            <span class ="text text-center">
-                                <i class="fa-solid fa-eye fa-2x"></i>
-                                <h4><?php the_title() ?></h4>
-                            </span>
+                <div class="col-6 col-md-3 mb-3 mix <?php echo $terms; ?>" id="caption">
+                    <span class ="text text-center">
+                        <i class="fa-solid fa-eye fa-2x"></i>
+                        <h4><?php the_title() ?></h4>
+                    </span>
                     <figure class="imgport">
                         <?php echo the_post_thumbnail('full', ['class' => 'img-fluid']) ?>
                     </figure>
